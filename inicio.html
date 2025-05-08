@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guerrero Chankas - Transporte de Carga</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --rojo-guerrero: #d62828;
+            --rojo-oscuro: #b51f1f;
+            --blanco: #ffffff;
+        }
+        .bg-guerrero {
+            background-color: var(--rojo-guerrero);
+        }
+        .text-guerrero {
+            color: var(--rojo-guerrero);
+        }
+        .hero {
+            background: url('img/camion.png') no-repeat center center;
+            background-size: cover;
+            padding: 200px 0;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .servicio-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .servicio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+        }
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+        .logo-container {
+            background-color: white;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .logo-container img {
+            height: 50px;
+            width: auto;
+        }
+        .company-name {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 1.5rem;
+            color: white;
+            margin-left: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        .map-container {
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .route-list {
+            column-count: 2;
+            column-gap: 20px;
+        }
+        .route-list li {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+        .btn-guerrero {
+            background-color: var(--rojo-guerrero);
+            color: white;
+            border: none;
+        }
+        .btn-guerrero:hover {
+            background-color: var(--rojo-oscuro);
+            color: white;
+        }
+        footer {
+            border-top: 5px solid var(--rojo-guerrero);
+        }
+        @media (max-width: 768px) {
+            .route-list {
+                column-count: 1;
+            }
+            .hero {
+                padding: 150px 0;
+            }
+        }
+        .logo-img {
+    height: 50px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+.carousel-item img {
+      height: 500px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .carousel-caption h5 {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .carousel-caption p {
+      font-size: 1rem;
+    }
+
+    .carousel-inner {
+      border-radius: 10px;
+    }
+    </style>
+</head>
+<body>
+    <!-- Navbar mejorado con logo destacado -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-guerrero fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="img/logo.png" alt="Guerrero Chankas" class="me-2 logo-img">
+                <span class="fw-bold text-uppercase">Guerrero Chankas</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#flota">Flota</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#rutas">Rutas</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#galeria">Galería</a>
+                      </li>
+                      
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                </ul>
+                <a href="#contacto" class="btn btn-light ms-lg-3 fw-semibold">Cotizar</a>
+            </div>
+        </div>
+    </nav>
+    
+
+    <!-- Hero Section -->
+    <section class="hero text-white text-center">
+        <div class="hero-content container">
+            <h1 class="display-4 fw-bold">TRANSPORTE DE CARGA CONFIABLE</h1>
+            <p class="lead">Soluciones logísticas rápidas y seguras en todo el Perú</p>
+            <a href="#contacto" class="btn btn-danger btn-lg mt-3">Contáctanos</a>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">NUESTROS <span class="text-guerrero">SERVICIOS</span></h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card servicio-card h-100 shadow">
+                        <div class="card-body text-center">
+                            <i class="fas fa-truck fa-3x text-guerrero mb-3"></i>
+                            <h3>Carga Nacional</h3>
+                            <p>Transportamos tu carga a cualquier parte del país con seguridad y puntualidad.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card servicio-card h-100 shadow">
+                        <div class="card-body text-center">
+                            <i class="fas fa-boxes fa-3x text-guerrero mb-3"></i>
+                            <h3>Carga Pesada</h3>
+                            <p>Manejo especializado de maquinaria y carga de gran tamaño.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card servicio-card h-100 shadow">
+                        <div class="card-body text-center">
+                            <i class="fas fa-warehouse fa-3x text-guerrero mb-3"></i>
+                            <h3>Almacenamiento</h3>
+                            <p>Soluciones de almacén para tu mercancía con seguimiento 24/7.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flota -->
+    <section id="flota" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">NUESTRA <span class="text-guerrero">FLOTA</span></h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card shadow h-100">
+                        <img src="https://via.placeholder.com/300x200?text=Camion+Volteo" class="card-img-top" alt="Camión Volteo">
+                        <div class="card-body">
+                            <h5 class="card-title">Camión Volteo</h5>
+                            <p class="card-text">Capacidad: 20 toneladas. Ideal para construcción.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow h-100">
+                        <img src="https://via.placeholder.com/300x200?text=Trailer+Plancha" class="card-img-top" alt="Trailer Plancha">
+                        <div class="card-body">
+                            <h5 class="card-title">Trailer Plancha</h5>
+                            <p class="card-text">Capacidad: 40 toneladas. Para carga pesada.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow h-100">
+                        <img src="https://via.placeholder.com/300x200?text=Camion+Refrigerado" class="card-img-top" alt="Camión Refrigerado">
+                        <div class="card-body">
+                            <h5 class="card-title">Camión Refrigerado</h5>
+                            <p class="card-text">Transporte de productos perecederos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rutas con Google Maps integrado -->
+    <section id="rutas" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">NUESTRAS <span class="text-guerrero">RUTAS</span></h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h4 class="text-guerrero mb-4">Principales Rutas</h4>
+                            <ul class="route-list">
+                                <li><strong>Lima → Cangallo → Andahuaylas</strong></li>
+                                <li>Huaytara</li>
+                                <li>San Clemente</li>
+                                <li>Cañete</li>
+                                <li>Lurín</li>
+                                <li>Terminal Atocongo</li>
+                                <li>San Juan de Miraflores</li>
+                                <li>Luna Pizarro</li>
+                                <li>San Luis</li>
+                                <li>Ate Santa Anita</li>
+                                <li>San Juan de Lurigancho</li>
+                                <li>Manchay</li>
+                                <li>Huaycán</li>
+                                <li>Callao</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card shadow h-100">
+                        <div class="card-body p-0">
+                            <div id="map" class="map-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="py-5 bg-light">
+        <div class="container">
+          <h2 class="text-center mb-4">Galería de Fotos</h2>
+    
+          <!-- Carousel wrapper -->
+          <div
+            id="carouselGaleria"
+            class="carousel slide carousel-fade"
+            data-mdb-ride="carousel"
+          >
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-mdb-target="#carouselGaleria"
+                data-mdb-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-mdb-target="#carouselGaleria"
+                data-mdb-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-mdb-target="#carouselGaleria"
+                data-mdb-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
+              <button
+                type="button"
+                data-mdb-target="#carouselGaleria"
+                data-mdb-slide-to="3"
+                aria-label="Slide 4"
+              ></button>
+            </div>
+    
+            <!-- Inner -->
+            <div class="carousel-inner">
+              <!-- Single item -->
+              <div class="carousel-item active">
+                <img src="img/galeria/1.jpeg" class="d-block w-100 img-fluid" alt="Foto 1" loading="lazy" />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Etiqueta del primer slide</h5>
+                  <p>Una descripción para la primera imagen.</p>
+                </div>
+              </div>
+    
+              <!-- Single item -->
+              <div class="carousel-item">
+                <img src="img/galeria/2.jpeg" class="d-block w-100 img-fluid" alt="Foto 2" loading="lazy" />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Etiqueta del segundo slide</h5>
+                  <p>Una descripción para la segunda imagen.</p>
+                </div>
+              </div>
+    
+              <!-- Single item -->
+              <div class="carousel-item">
+                <img src="img/galeria/3.jpeg" class="d-block w-100 img-fluid" alt="Foto 3" loading="lazy" />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Etiqueta del tercer slide</h5>
+                  <p>Una descripción para la tercera imagen.</p>
+                </div>
+              </div>
+    
+              <!-- Single item -->
+              <div class="carousel-item">
+                <img src="img/galeria/4.jpeg" class="d-block w-100 img-fluid" alt="Foto 4" loading="lazy" />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Etiqueta del cuarto slide</h5>
+                  <p>Una descripción para la cuarta imagen.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Inner -->
+    
+            <!-- Controls -->
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-mdb-target="#carouselGaleria"
+              data-mdb-slide="prev"
+            >
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-mdb-target="#carouselGaleria"
+              data-mdb-slide="next"
+            >
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
+          </div>
+          <!-- Carousel wrapper -->
+        </div>
+      </section>
+
+
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">CONTACTO</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Nombre" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Correo electrónico" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="tel" class="form-control" placeholder="Teléfono">
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" rows="5" placeholder="Mensaje" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-guerrero btn-lg">Enviar Mensaje</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h4 class="text-guerrero mb-4">Información de Contacto</h4>
+                            <div class="mb-4">
+                                <h5><i class="fas fa-map-marker-alt text-guerrero me-2"></i> Dirección</h5>
+                                <p>Av. Transporte #123, Lima, Perú</p>
+                            </div>
+                            <div class="mb-4">
+                                <h5><i class="fas fa-phone text-guerrero me-2"></i> Teléfono</h5>
+                                <p>+51 987 654 321</p>
+                            </div>
+                            <div class="mb-4">
+                                <h5><i class="fas fa-envelope text-guerrero me-2"></i> Email</h5>
+                                <p>contacto@guerrerochankas.com</p>
+                            </div>
+                            <div class="mb-4">
+                                <h5><i class="fas fa-clock text-guerrero me-2"></i> Horario de Atención</h5>
+                                <p>Lunes a Viernes: 8:00 am - 6:00 pm<br>Sábados: 9:00 am - 1:00 pm</p>
+                            </div>
+                            <div class="social-icons mt-4">
+                                <a href="#" class="btn btn-outline-secondary me-2"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://wa.me/51987654321" class="btn btn-outline-success me-2"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#" class="btn btn-outline-primary"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <img src="img/logo.png" alt="Guerrero Chankas" class="img-fluid mb-3" style="max-height: 80px;">
+                    <p>Transporte de carga confiable y seguro en todo el Perú.</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#servicios" class="text-white">Servicios</a></li>
+                        <li><a href="#flota" class="text-white">Nuestra Flota</a></li>
+                        <li><a href="#rutas" class="text-white">Rutas</a></li>
+                        <li><a href="#contacto" class="text-white">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contacto</h5>
+                    <p><i class="fas fa-phone me-2"></i> +51 987 654 321</p>
+                    <p><i class="fas fa-envelope
